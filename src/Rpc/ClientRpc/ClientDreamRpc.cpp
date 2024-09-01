@@ -11,16 +11,16 @@
  *
  */
 
+#include <iostream>
 #include <ClientDreamRpc.h>
 
-ClientDreamRpc::ClientDreamRpc(const ClientTransport *ClientTransport_p) : ClientRpc(ClientTransport_p)
-{
-    m_ClientTransport_p = ClientTransport_p;
-}
+using namespace std;
+
+ClientDreamRpc * ClientDreamRpc::m_ClientDreamRpc_p= nullptr;
 
 bool ClientDreamRpc::connect(const std::string server_name, const int port_number)
 {
-    cout<<"... Initiating connection on Server: "<< server_name << ", port no.: "<< port_number << endl;
+    cout <<"... Initiating connection on Server: "<< server_name << ", port no.: "<< port_number << endl;
     m_server_name = server_name;
     m_port_number = port_number;
 
@@ -44,9 +44,25 @@ bool ClientDreamRpc::disconnect()
     return true;
 }
 
-std::string ClientDreamRpc::callRemoteFunction(const std::string &funcName, Typename... args)
+template<typename... Args>
+std::string ClientDreamRpc::callRemoteFunction(const std::string &funcName, Args... args)
 {
     if(m_is_connected == true) {
         
     }
+
+    return "null";
+}
+
+ClientDreamRpc *ClientDreamRpc::GetInstance(const ClientTransport * ptr)
+{
+    /**
+     * This is a safer way to create an instance. instance = new Singleton is
+     * dangeruous in case two instance threads wants to access at the same time
+     */
+    if(m_ClientDreamRpc_p==nullptr){
+        m_ClientDreamRpc_p = new ClientDreamRpc(ptr);
+    }
+
+    return m_ClientDreamRpc_p;
 }

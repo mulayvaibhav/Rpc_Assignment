@@ -4,21 +4,26 @@
 #include <string>
 #include <ClientTransport.h>
 
-namespace Rpc {
-
     class ClientRpc {
 
         public:
             ClientRpc(const ClientTransport *ClientTransport_p);
-            virtual ~ClientRpc();
+            virtual ~ClientRpc() {
+
+            }
             virtual bool connect(const std::string, const int) = 0;
             virtual bool disconnect(void) = 0;
-            virtual std::string callRemoteFunction(const std::string &funcName, Typename... args) = 0;
+            
+            template <typename... Args>
+            std::string callRemoteFunction(const std::string &funcName, Args... args) {
+
+                return "Not valid";
+            }
         
         private:
-            ClientTransport * m_ClientTransport_p = nullptr;
+            const ClientTransport * m_ClientTransport_p = nullptr;
     };
 
-}
+
 
 #endif
