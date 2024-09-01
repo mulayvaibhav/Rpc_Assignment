@@ -11,4 +11,10 @@
  *
  */
 
- 
+#include <ClientRpc.h>
+
+ClientRpc::ClientRpc(const ClientTransport *ClientTransport_p) 
+{
+    m_ClientTransport_p = ClientTransport_p;
+}
+
