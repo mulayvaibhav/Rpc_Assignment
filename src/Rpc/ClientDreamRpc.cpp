@@ -14,12 +14,14 @@
 #include <iostream>
 #include <ClientDreamRpc.h>
 
-
 using namespace std;
 
-ClientDreamRpc * ClientDreamRpc::m_ClientDreamRpc_p= nullptr;
+ClientDreamRpc * ClientDreamRpc::m_ClientDreamRpc_p = nullptr;
 
-ClientDreamRpc::ClientDreamRpc(ClientTransport *ClientTransport_p): ClientRpc(ClientTransport_p), m_ClientTransport_p(ClientTransport_p) {
+ClientDreamRpc::ClientDreamRpc(ClientTransportInterface *ClientTransport_p): 
+                ClientRpcInterface(ClientTransport_p), 
+                m_ClientTransport_p(ClientTransport_p) 
+{
     cout << "-> Dream RPC Client instance created" << endl;
 }
 
@@ -28,12 +30,8 @@ bool ClientDreamRpc::connect(const std::string server_name, const int port_numbe
     cout <<"... Initiating connection on Server: "<< server_name << ", port no.: "<< port_number << endl;
     m_server_name = server_name;
     m_port_number = port_number;
-
     m_ClientTransport_p->connect(server_name, port_number);
-
     m_is_connected = true;
-
-
     return true;
 }
 
@@ -61,7 +59,7 @@ std::string ClientDreamRpc::callRemoteFunction(const std::string &funcName, int 
     return "null";
 }
 
-ClientDreamRpc *ClientDreamRpc::GetInstance(ClientTransport * ptr)
+ClientDreamRpc *ClientDreamRpc::GetInstance(ClientTransportInterface * ptr)
 {
     /**
      * This is a safer way to create an instance. instance = new Singleton is

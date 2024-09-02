@@ -11,11 +11,9 @@
  *
  */
 
-#include <ClientRpc.h>
+#include <ClientRpcInterface.h>
 
-
-
-ClientRpc::ClientRpc(ClientTransport *ClientTransport_p) 
+ClientRpcInterface::ClientRpcInterface(ClientTransportInterface *ClientTransport_p) 
 {
     m_ClientTransport_p = ClientTransport_p;
 }

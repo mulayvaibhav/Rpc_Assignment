@@ -1,11 +1,11 @@
 #ifndef CLIENT_TRANSPORT_H
 #define CLIENT_TRANSPORT_H
 
-class ClientTransport {
+class ClientTransportInterface {
     public:
-        ClientTransport(void) {
+        ClientTransportInterface(void) {
         }
-        virtual ~ClientTransport() {
+        virtual ~ClientTransportInterface() {
         }
         virtual void connect(const std::string server_name, const int port_number) = 0;
         virtual void sendRequest(const std::string & data) = 0;

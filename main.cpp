@@ -3,8 +3,8 @@
 #include <vector>
 #include <functional>
 
-#include <ClientRpc.h>
-#include <ClientTransport.h>
+#include <ClientRpcInterface.h>
+#include <ClientTransportInterface.h>
 #include <ClientBadDreamHTTP.h>
 #include <ClientDreamRpc.h>
 
@@ -12,9 +12,9 @@ using namespace std;
 
 int main()
 {
-    ClientTransport * http_ptr = new ClientBadDreamHTTP();
+    ClientTransportInterface * http_ptr = new ClientBadDreamHTTP();
     
-    ClientRpc * ptr = ClientDreamRpc::GetInstance(http_ptr);
+    ClientRpcInterface * ptr = ClientDreamRpc::GetInstance(http_ptr);
 
     if(ptr != nullptr) {
         ptr->connect("https://google.com", 9090);  

@@ -4,17 +4,15 @@ cmake_minimum_required(VERSION 3.16.3)
 project(DREAM)
 
 include_directories(
-    include/Rpc/ClientRpc
-    include/Rpc/ServerRpc
+    include/Rpc
     include/Transport
-    include/Transport/ServerTransport
 )
 
 add_executable(DreamRpc 
     main.cpp 
-    src/Rpc/ClientRpc/ClientRpc.cpp
-    src/Rpc/ClientRpc/ClientDreamRpc.cpp
-    src/Transport/ClientTransport.cpp
+    src/Rpc/ClientRpcInterface.cpp
+    src/Rpc/ClientDreamRpc.cpp
+    src/Transport/ClientTransportInterface.cpp
     src/Transport/ClientBadDreamHTTP.cpp)
 
 # Link any necessary libraries (e.g., pthread for threading, networking libraries, etc.)

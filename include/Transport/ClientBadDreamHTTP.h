@@ -1,13 +1,13 @@
 #ifndef CLIENT_TRANSPORT_BADDREAM_HTTP_H
 #define CLIENT_TRANSPORT_BADDREAM_HTTP_H
 
-#include <ClientTransport.h>
+#include <ClientTransportInterface.h>
 #include <iostream>
 
 using namespace std;
 
 
-class ClientBadDreamHTTP : public ClientTransport {
+class ClientBadDreamHTTP : public ClientTransportInterface {
 
     public:
         ClientBadDreamHTTP(void);

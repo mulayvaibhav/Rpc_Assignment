@@ -1,16 +1,13 @@
 #ifndef CLIENT_DREAM_RPC_H
 #define CLIENT_DREAM_RPC_H
 
-#include <ClientRpc.h>
-#include <sstream>
-#include <tuple>
-#include <functional>
+#include <ClientRpcInterface.h>
 
 using namespace std;
 
-class ClientDreamRpc : public ClientRpc {
+class ClientDreamRpc : public ClientRpcInterface {
     protected:
-        ClientDreamRpc(ClientTransport *ClientTransport_p);
+        ClientDreamRpc(ClientTransportInterface *ClientTransport_p);
         static ClientDreamRpc* m_ClientDreamRpc_p;
     public:
         ~ClientDreamRpc() {
@@ -29,9 +26,9 @@ class ClientDreamRpc : public ClientRpc {
 
         std::string callRemoteFunction(const std::string &funcName, int arg1= 0, int arg2 = 0);
         
-        static ClientDreamRpc *GetInstance(ClientTransport *);
+        static ClientDreamRpc *GetInstance(ClientTransportInterface *);
     private:
-        ClientTransport * m_ClientTransport_p = nullptr;
+        ClientTransportInterface * m_ClientTransport_p = nullptr;
         std::string m_server_name;
         uint32_t m_port_number;
         bool m_is_connected;
