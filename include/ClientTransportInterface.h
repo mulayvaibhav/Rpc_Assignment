@@ -1,6 +1,10 @@
 #ifndef CLIENT_TRANSPORT_H
 #define CLIENT_TRANSPORT_H
 
+#include <string>
+
+using namespace std;
+
 class ClientTransportInterface {
     public:
         ClientTransportInterface(void) {

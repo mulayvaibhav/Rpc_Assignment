@@ -17,7 +17,7 @@
 
 ClientBadDreamHTTP::ClientBadDreamHTTP(void)
 {
-    cout<<"ClientBadDreamHTTP instance created, initalizing HTTP instance on client...." << endl;
+    cout<<"... BadDreamHTTP instance created, initalizing HTTP on client side" << endl;
 }
 
 void ClientBadDreamHTTP::connect(const std::string server_name, const int port_number) 
@@ -25,8 +25,11 @@ void ClientBadDreamHTTP::connect(const std::string server_name, const int port_n
     m_server_name = server_name;
     m_port_number = port_number;
 
-    cout<<"ClientBadDreamHTTP: Initiating connection... " <<endl;
-    cout<<"Connected to server: "<< m_server_name<<", port_number: "<<m_port_number << endl; 
+    cout <<"... trying to connect" << endl; 
+
+    /* call HTTP library function to connect */
+
+    cout <<"... connected to: " << server_name <<" : " << port_number << endl;
 }
 
 void ClientBadDreamHTTP::sendRequest(const std::string & data) 

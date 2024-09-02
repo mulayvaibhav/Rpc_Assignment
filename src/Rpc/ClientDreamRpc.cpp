@@ -22,7 +22,7 @@ ClientDreamRpc::ClientDreamRpc(ClientTransportInterface *ClientTransport_p):
                 ClientRpcInterface(ClientTransport_p), 
                 m_ClientTransport_p(ClientTransport_p) 
 {
-    cout << "-> Dream RPC Client instance created" << endl;
+    cout << "... Dream RPC Client instance created" << endl;
 }
 
 bool ClientDreamRpc::connect(const std::string server_name, const int port_number)
@@ -47,16 +47,21 @@ bool ClientDreamRpc::disconnect()
     return true;
 }
 
-std::string ClientDreamRpc::callRemoteFunction(const std::string &funcName, int arg1, int arg2)
+bool ClientDreamRpc::callRemoteFunction(const std::string &funcName, int arg1, int arg2)
 {
+    bool status = false;
     if(m_is_connected == true) {
 
         std::string requestData = funcName + "(" + std::to_string(arg1) + ", " + std::to_string(arg2) + ")";
-        cout<<"-> Sending remote request" << endl;
+        //cout<<"-> Sending remote request" << endl;
         m_ClientTransport_p->sendRequest(requestData);
+        status = true;
+    }
+    else {
+        cout << "... Client RPC not connected, rpc failed" << endl;
     }
 
-    return "null";
+    return status;
 }
 
 ClientDreamRpc *ClientDreamRpc::GetInstance(ClientTransportInterface * ptr)

@@ -20,7 +20,7 @@ class ClientBadDreamHTTP : public ClientTransportInterface {
     
     private:
         std::string m_server_name;
-        std::string m_port_number;
+        int m_port_number;
 };
 
 

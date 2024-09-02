@@ -23,9 +23,7 @@ class ClientDreamRpc : public ClientRpcInterface {
         void operator=(const ClientDreamRpc &) = delete;
         bool connect(const std::string, const int);
         bool disconnect(void);
-
-        std::string callRemoteFunction(const std::string &funcName, int arg1= 0, int arg2 = 0);
-        
+        bool callRemoteFunction(const std::string &funcName, int arg1= 0, int arg2 = 0);
         static ClientDreamRpc *GetInstance(ClientTransportInterface *);
     private:
         ClientTransportInterface * m_ClientTransport_p = nullptr;

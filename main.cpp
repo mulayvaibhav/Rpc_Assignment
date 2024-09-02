@@ -7,33 +7,33 @@
 #include <ClientTransportInterface.h>
 #include <ClientBadDreamHTTP.h>
 #include <ClientDreamRpc.h>
+#include <ClientConcreteDreamRpcBadDreamHTTPFactory.h>
+
 
 using namespace std;
 
 int main()
 {
-    ClientTransportInterface * http_ptr = new ClientBadDreamHTTP();
     
-    ClientRpcInterface * ptr = ClientDreamRpc::GetInstance(http_ptr);
+    ClientAbstractFactoryInterface * clientFactory_p = new ClientConcreteDreamRpcBadDreamHTTPFactory();
+    if(clientFactory_p == nullptr) {
+        cout << "failed to create client factory "<< endl;
 
-    if(ptr != nullptr) {
-        ptr->connect("https://google.com", 9090);  
-
-        string func_name("hello");
-        //ClientDreamRpc * ch_ptr = dynamic_cast<ClientDreamRpc*>(ptr);
-        //  int a = 0;
-        if(ptr != nullptr) {
-            //ClientDreamRpc::callRemoteFunction(func_name, a);
-
-            //func_name = "add";
-            //cout << ch_ptr->callRemoteFunction(func_name, 2, 7) << endl;
-
-
-        }
-
-        
-
+        return 0;
     }
 
+    /* BadDreamHTTP object creation */
+    ClientTransportInterface * clientHTTPTransport_p = clientFactory_p->CreateClientTransport();
+    
+    /* DreamRPC object creatrion */
+    ClientRpcInterface * clientDreamRpc_p = clientFactory_p->CreateClientRpc(clientHTTPTransport_p);
+    if(clientDreamRpc_p == nullptr) {
+        cout << "failed to start the Client RPC "<< endl;
+
+        return 0;
+    }
+
+    clientDreamRpc_p->connect("https://google.com", 9090);
+    clientDreamRpc_p->callRemoteFunction("hello");
 
 }
