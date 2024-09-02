@@ -4,12 +4,13 @@
 #include <ClientRpc.h>
 #include <sstream>
 #include <tuple>
+#include <functional>
 
 using namespace std;
 
 class ClientDreamRpc : public ClientRpc {
     protected:
-        ClientDreamRpc(const ClientTransport *ClientTransport_p);
+        ClientDreamRpc(ClientTransport *ClientTransport_p);
         static ClientDreamRpc* m_ClientDreamRpc_p;
     public:
         ~ClientDreamRpc() {
@@ -26,24 +27,11 @@ class ClientDreamRpc : public ClientRpc {
         bool connect(const std::string, const int);
         bool disconnect(void);
 
-        template<typename... Args>
-        std::string callRemoteFunction(const std::string &funcName, Args... args);
-
-        std::string callRemoteFunction(const std::string &funcName);
+        std::string callRemoteFunction(const std::string &funcName, int arg1= 0, int arg2 = 0);
         
-        static ClientDreamRpc *GetInstance(const ClientTransport *);
+        static ClientDreamRpc *GetInstance(ClientTransport *);
     private:
-        template <typename... Args>
-        std::string serializeArgs(Args... args) {
-            std::ostringstream oss;
-            std::vector<std::string> serializedArgs = {serialize(args)...};
-            for (const auto& arg : serializedArgs) {
-                oss << arg << " "; // Separate arguments with space
-            }
-            return oss.str();
-        }
-
-        const ClientTransport * m_ClientTransport_p = nullptr;
+        ClientTransport * m_ClientTransport_p = nullptr;
         std::string m_server_name;
         uint32_t m_port_number;
         bool m_is_connected;

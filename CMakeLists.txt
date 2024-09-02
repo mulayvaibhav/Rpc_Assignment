@@ -6,14 +6,16 @@ project(DREAM)
 include_directories(
     include/Rpc/ClientRpc
     include/Rpc/ServerRpc
-    include/Transport/ClientTransport
+    include/Transport
     include/Transport/ServerTransport
 )
 
 add_executable(DreamRpc 
     main.cpp 
     src/Rpc/ClientRpc/ClientRpc.cpp
-    src/Rpc/ClientRpc/ClientDreamRpc.cpp)
+    src/Rpc/ClientRpc/ClientDreamRpc.cpp
+    src/Transport/ClientTransport.cpp
+    src/Transport/ClientBadDreamHTTP.cpp)
 
 # Link any necessary libraries (e.g., pthread for threading, networking libraries, etc.)
 target_link_libraries(DreamRpc pthread)

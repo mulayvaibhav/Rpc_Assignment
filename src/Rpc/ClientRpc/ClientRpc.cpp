@@ -15,7 +15,7 @@
 
 
 
-ClientRpc::ClientRpc(const ClientTransport *ClientTransport_p) 
+ClientRpc::ClientRpc(ClientTransport *ClientTransport_p) 
 {
     m_ClientTransport_p = ClientTransport_p;
 }
