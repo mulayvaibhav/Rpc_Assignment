@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <vector>
-#include <functional>
+#include <unistd.h>
 
 #include <ClientRpcInterface.h>
 #include <ClientTransportInterface.h>
@@ -35,5 +35,11 @@ int main()
 
     clientDreamRpc_p->connect("https://google.com", 9090);
     clientDreamRpc_p->callRemoteFunction("hello");
+    sleep(1);
+    clientDreamRpc_p->handleResponse("");
+
+    while(1) {
+
+    }
 
 }

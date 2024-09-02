@@ -13,6 +13,7 @@ class ClientTransportInterface {
         }
         virtual void connect(const std::string server_name, const int port_number) = 0;
         virtual void sendRequest(const std::string & data) = 0;
+        virtual std::string handleResponse(void) = 0;
     private:
 };
 

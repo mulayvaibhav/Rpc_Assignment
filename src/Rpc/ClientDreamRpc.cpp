@@ -53,7 +53,6 @@ bool ClientDreamRpc::callRemoteFunction(const std::string &funcName, int arg1, i
     if(m_is_connected == true) {
 
         std::string requestData = funcName + "(" + std::to_string(arg1) + ", " + std::to_string(arg2) + ")";
-        //cout<<"-> Sending remote request" << endl;
         m_ClientTransport_p->sendRequest(requestData);
         status = true;
     }
@@ -75,4 +74,13 @@ ClientDreamRpc *ClientDreamRpc::GetInstance(ClientTransportInterface * ptr)
     }
 
     return m_ClientDreamRpc_p;
+}
+
+std::string ClientDreamRpc::handleResponse(const std::string& response)
+{
+    if(response.length() == 0) {
+        
+    }
+    /* receive data from Bad Dream HTTP */
+    return m_ClientTransport_p->handleResponse();
 }

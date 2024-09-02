@@ -13,6 +13,7 @@ class ClientRpcInterface {
         virtual bool connect(const std::string, const int) = 0;
         virtual bool disconnect(void) = 0;       
         virtual bool callRemoteFunction(const std::string &funcName, int arg1= 0, int arg2 = 0)=0;
+        virtual std::string handleResponse(const std::string& response)=0;
     
     private:
         ClientTransportInterface * m_ClientTransport_p = nullptr;
