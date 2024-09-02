@@ -79,8 +79,8 @@ ClientDreamRpc *ClientDreamRpc::GetInstance(ClientTransportInterface * ptr)
 std::string ClientDreamRpc::handleResponse(const std::string& response)
 {
     if(response.length() == 0) {
-        
+
     }
     /* receive data from Bad Dream HTTP */
-    return m_ClientTransport_p->handleResponse();
+    return std::string("... [ClientDreamRpc] receviced response from server : ") + m_ClientTransport_p->handleResponse();
 }

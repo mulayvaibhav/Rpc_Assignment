@@ -29,18 +29,18 @@ void * fake_server(void * fake) {
 
     while(1) {
         if (requestData.find("hello") != std::string::npos) {
-            cout<<"received hello"<<endl;
+            //cout<<"received hello"<<endl;
             responseData = "Greetings";
             requestData = "";
         } 
         else if (requestData.find("add") != std::string::npos) {
             int arg1 = 0, arg2=0;
-
+            //cout<<"requestData: "<<requestData<<endl;
             size_t start = requestData.find('(');
             size_t end = requestData.find(')');
 
             // If the brackets are not found or in the wrong order, print an error and return
-            if (start != std::string::npos && end != std::string::npos && start >= end) {
+            if (start != std::string::npos && end != std::string::npos && start <= end) {
 
                 // Extract the substring between the brackets
                 std::string args = requestData.substr(start + 1, end - start - 1);
@@ -58,7 +58,7 @@ void * fake_server(void * fake) {
                     // Convert to integer and store in the arguments vector
                     arguments.push_back(std::stoi(item));
                 }
-
+                //cout<<"size: "<<arguments.size();
                 // Store the parsed integers in the provided integer variables
                 if (arguments.size() == 2) {
                     arg1 = arguments[0];
@@ -67,6 +67,8 @@ void * fake_server(void * fake) {
                     std::cerr << "Expected two arguments, but found: " << arguments.size() << std::endl;
                 }
                 int res = arg1+arg2;
+
+                //cout<<"res : " << res <<endl;
                 responseData = std::to_string(res);
             }
 
@@ -108,7 +110,7 @@ void ClientBadDreamHTTP::sendRequest(const std::string & data)
 
 std::string ClientBadDreamHTTP::handleResponse(void)
 {
-    cout<< "handleresponse : " << responseData << endl;
+    //cout<< "handleresponse : " << responseData << endl;
     /* fakes below layers that gets response from server */
     if(responseData.length() != 0) {
         return responseData;

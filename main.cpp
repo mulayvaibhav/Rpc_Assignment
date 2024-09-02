@@ -34,12 +34,19 @@ int main()
     }
 
     clientDreamRpc_p->connect("https://google.com", 9090);
-    clientDreamRpc_p->callRemoteFunction("hello");
-    sleep(1);
-    clientDreamRpc_p->handleResponse("");
+    
+    cout<<"    Starting communication..." << endl << endl;
 
-    while(1) {
-
+    int x = 10;
+    while(--x) {
+        clientDreamRpc_p->callRemoteFunction("hello");
+        sleep(1);
+        cout<<clientDreamRpc_p->handleResponse("")<<endl;
+        cout<<endl;
+        clientDreamRpc_p->callRemoteFunction("add", 100, 200);
+        sleep(1);
+        cout<<clientDreamRpc_p->handleResponse("")<<endl;
+        cout<<endl;
     }
 
 }
