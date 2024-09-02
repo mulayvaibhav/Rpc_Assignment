@@ -9,7 +9,7 @@ Requirements for compilation:
 
 To compile:
 
-- run $> ./setup_bash.sh
+- $> ./build_script.sh
 - It will compile the source code and place the executable in the bin directory that will create 
 
 To run:
