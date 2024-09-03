@@ -27,7 +27,7 @@ ClientDreamRpc::ClientDreamRpc(ClientTransportInterface *ClientTransport_p):
 
 bool ClientDreamRpc::connect(const std::string server_name, const int port_number)
 {
-    cout <<"... Initiating connection on Server: "<< server_name << ", port no.: "<< port_number << endl;
+    cout <<"... [ClientDreamRpc::connect] - Initiating connection on Server: "<< server_name << ", port no.: "<< port_number << endl;
     m_server_name = server_name;
     m_port_number = port_number;
     m_ClientTransport_p->connect(server_name, port_number);
@@ -39,8 +39,8 @@ bool ClientDreamRpc::connect(const std::string server_name, const int port_numbe
 bool ClientDreamRpc::disconnect()
 {
     if(m_is_connected == true) {
-        cout<<"... Disconnecting Server: "<< m_server_name << ", port no.: "<< m_port_number << endl;
-    
+        cout<<"... [ClientDreamRpc::disconnect] disconnecting Server: "<< m_server_name << ", port no.: "<< m_port_number << endl;
+        m_ClientTransport_p->disconnect();
         // Call Dream Rpc library 
     }
     
@@ -51,7 +51,7 @@ bool ClientDreamRpc::callRemoteFunction(const std::string &funcName, int arg1, i
 {
     bool status = false;
     if(m_is_connected == true) {
-
+        cout << "... [ClientDreamRpc::callRemoteFunction] making rpc call "<< endl;
         std::string requestData = funcName + "(" + std::to_string(arg1) + ", " + std::to_string(arg2) + ")";
         m_ClientTransport_p->sendRequest(requestData);
         status = true;
@@ -70,6 +70,7 @@ ClientDreamRpc *ClientDreamRpc::GetInstance(ClientTransportInterface * ptr)
      * dangeruous in case two instance threads wants to access at the same time
      */
     if(m_ClientDreamRpc_p==nullptr){
+        cout << "... [ClientDreamRpc] created " << endl;
         m_ClientDreamRpc_p = new ClientDreamRpc(ptr);
     }
 
@@ -82,5 +83,5 @@ std::string ClientDreamRpc::handleResponse(const std::string& response)
 
     }
     /* receive data from Bad Dream HTTP */
-    return std::string("... [ClientDreamRpc] receviced response from server : ") + m_ClientTransport_p->handleResponse();
+    return std::string("... [ClientDreamRpc::handleResponse] receviced response from server : ") + m_ClientTransport_p->handleResponse();
 }

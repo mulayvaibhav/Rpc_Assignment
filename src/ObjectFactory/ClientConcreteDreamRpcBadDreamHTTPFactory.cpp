@@ -21,6 +21,7 @@
 ClientTransportInterface * 
     ClientConcreteDreamRpcBadDreamHTTPFactory::CreateClientTransport(void)
 {
+    cout << "... [ClientConcreteDreamRpcBadDreamHTTPFactory] created " << endl;
     ClientTransportInterface * ptr = new ClientBadDreamHTTP();
     return ptr;
 }

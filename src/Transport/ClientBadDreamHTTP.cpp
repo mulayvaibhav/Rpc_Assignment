@@ -103,18 +103,23 @@ void ClientBadDreamHTTP::connect(const std::string server_name, const int port_n
 void ClientBadDreamHTTP::sendRequest(const std::string & data) 
 {
     responseData = "";
-    cout<<"... [ClientBadDreamHTTP] Sending remote request: "<< data << endl;
+    cout<<"... [ClientBadDreamHTTP::sendRequest] Sending remote request: "<< data << endl;
     requestData = data;
     /* fakes sending RPC data to server s*/
 }
 
 std::string ClientBadDreamHTTP::handleResponse(void)
 {
-    //cout<< "handleresponse : " << responseData << endl;
+    cout<< "... [ClientBadDreamHTTP::handleResponse] : " << responseData << endl;
     /* fakes below layers that gets response from server */
     if(responseData.length() != 0) {
         return responseData;
     }
 
     return "";
+}
+
+void ClientBadDreamHTTP::disconnect(void)
+{
+    cout<<"... [ClientBadDreamHTTP::disconnect] disconnecting ..." << endl;
 }

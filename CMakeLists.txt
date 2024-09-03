@@ -11,7 +11,10 @@ add_executable(DreamRpc
     src/Rpc/ClientDreamRpc.cpp
     src/Transport/ClientTransportInterface.cpp
     src/Transport/ClientBadDreamHTTP.cpp
-    src/ObjectFactory/ClientConcreteDreamRpcBadDreamHTTPFactory.cpp)
+    src/ObjectFactory/ClientConcreteDreamRpcBadDreamHTTPFactory.cpp
+    src/Rpc/ServerRpcInterface.cpp
+    src/Rpc/ServerDreamRpc.cpp
+    src/ObjectFactory/ServerConcreteDreamRpcBadDreamHTTPFactory.cpp)
 
 # Link any necessary libraries (e.g., pthread for threading, networking libraries, etc.)
 target_link_libraries(DreamRpc pthread)

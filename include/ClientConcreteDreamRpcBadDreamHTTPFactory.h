@@ -9,6 +9,9 @@ class ClientConcreteDreamRpcBadDreamHTTPFactory : public ClientAbstractFactoryIn
 
     public:
         ClientConcreteDreamRpcBadDreamHTTPFactory() {
+
+        }
+        ~ClientConcreteDreamRpcBadDreamHTTPFactory() {
             
         }
         ClientTransportInterface * CreateClientTransport(void);

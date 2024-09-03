@@ -19,6 +19,7 @@ class ClientBadDreamHTTP : public ClientTransportInterface {
         void connect(const std::string server_name, const int port_number);
         void sendRequest(const std::string & data);
         std::string handleResponse(void);
+        void disconnect(void);
     
     private:
         std::string m_server_name;
